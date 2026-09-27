@@ -1,0 +1,10 @@
+stage,cohort,eligible_orders,median_minutes,mean_minutes,p90_minutes,population
+order creation → pickup,All eligible,1495,26.066399733333334,27.67620108851728,42.099809816666664,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+order creation → pickup,Late,843,31.88418826666667,33.79061975668248,45.49862022,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+order creation → pickup,On time,652,19.848708275,19.770595356518406,25.693444313333334,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+pickup → delivery,All eligible,1490,47.28155560833333,45.78775789906041,60.14318527666667,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+pickup → delivery,Late,841,48.95034588333333,47.661799419579864,62.41631578333333,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+pickup → delivery,On time,649,45.281733466666665,43.359300397123775,56.632951086666665,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+order creation → delivery,All eligible,1495,73.96325873333333,73.29410026550725,93.27376135666667,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+order creation → delivery,Late,843,81.79680931666667,81.32748015035587,98.7788991266667,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.
+order creation → delivery,On time,652,65.16159650833333,62.907383635250504,75.93728844666668,Canonical delivered orders with promised ETA and actual delivery; stage timestamps present and chronological.

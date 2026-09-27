@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from pathlib import Path
 import json
 app=Flask(__name__)
-DATA=json.loads((Path(__file__).parent/'dispatch_data.json').read_text())
+DATA=json.loads((Path(__file__).resolve().parents[1]/'data'/'raw'/'json'/'dispatch_data.json').read_text())
 page_hits={}
 @app.get('/health')
 def health(): return jsonify({'status':'ok','service':'flasheats-dispatch-api'})

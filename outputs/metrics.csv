@@ -1,0 +1,6 @@
+metric,value,numerator,denominator,unclassifiable,unit,definition
+Late Delivery Rate,0.5638795986622074,843.0,1495,0,rate,VP Operations: delay > 0 among delivered orders with promised ETA and actual delivery time.
+Median Delay Among Late Eligible Deliveries,8.027227133333334,,843,0,minutes,Median actual minus promised minutes among metric-eligible deliveries with delay > 0.
+Median Order-to-Delivery Time,73.96325873333333,,1495,0,minutes,Median observed order creation to delivery duration; stage and late/on-time splits are in stage_timing.csv.
+Support Interaction Rate,0.300625,481.0,1600,0,rate,Canonical orders with at least one linked support ticket or customer interaction / all canonical orders; unlinked tickets excluded.
+Intervention Rate,0.26875,430.0,1600,0,rate,Canonical orders with one or more recorded interventions / all canonical orders.

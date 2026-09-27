@@ -1,0 +1,4 @@
+metric,value,numerator,denominator,unclassifiable,unit,definition
+Late Delivery Rate,0.5638795986622074,843,1495,0,rate,VP Operations: delay > 0 among delivered orders with promised ETA and actual delivery time.
+Late Delivery Rate (>10 minutes; alternative),0.2334448160535117,349,1495,0,rate,Support Lead: delay > 10 minutes among the same calculable delivered population.
+Historical-style Late Delivery Rate,0.5638795986622074,843,1495,0,rate,Delivered orders with non-null actual delivery time. Rows without promised ETA remain in this denominator and are counted as unclassifiable.

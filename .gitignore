@@ -1,21 +1,11 @@
-# Instructor-only materials (answers/keys — keep out of student-facing public repo)
-FlashEats_Class5_Instructor.ipynb
-FlashEats_Class6_Challenge_and_Solution.ipynb
-FlashEats_Class6_Concept_Walkthrough.ipynb
-FlashEats_Class7_Concept_Walkthrough.ipynb
-FlashEats_Class7_Walkthrough_Enriched.ipynb
-instructor/
-
-# Runtime artifacts
-venv/
-.venv/
+# Python runtime artifacts
 __pycache__/
-*.pyc
-instructor_output/
-student_output/
-.ipynb_checkpoints/
-data/nyc_taxi_cache/
+*.py[cod]
+.venv/
+venv/
 
-# Editor/OS
+# Editor and operating-system files
 .idea/
+.vscode/
 .DS_Store
+.ipynb_checkpoints/

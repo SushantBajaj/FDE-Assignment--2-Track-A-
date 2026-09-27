@@ -1,0 +1,5 @@
+intervention_type,eligible_orders,intervention_count,late_orders,late_rate,median_delay_minutes,grain_note
+CUSTOMER_CREDIT,63,64,42,0.6666666666666666,2.933470733333333,One row per distinct eligible order within type; an order may appear under multiple types.
+DRIVER_REASSIGNMENT,147,155,85,0.5782312925170068,1.5987855333333334,One row per distinct eligible order within type; an order may appear under multiple types.
+PRIORITY_DISPATCH,86,95,44,0.5116279069767442,0.33069434166666667,One row per distinct eligible order within type; an order may appear under multiple types.
+RESTAURANT_CONTACT,108,116,57,0.5277777777777778,0.8008932166666667,One row per distinct eligible order within type; an order may appear under multiple types.

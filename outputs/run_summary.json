@@ -1,0 +1,10 @@
+{
+  "eligible": 1495,
+  "late": 843,
+  "late_rate": 0.5638795986622074,
+  "median_late_delay_min": 8.027227133333334,
+  "support_rate": 0.300625,
+  "intervention_rate": 0.26875,
+  "validation_status": "WARN",
+  "api_retries": 2
+}

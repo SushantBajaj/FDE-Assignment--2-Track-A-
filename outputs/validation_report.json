@@ -1,0 +1,337 @@
+{
+  "overall_status": "WARN",
+  "checks": [
+    {
+      "check": "unique_order_grain",
+      "status": "WARN",
+      "observed": {
+        "rows": 1603,
+        "unique_order_ids": 1600
+      },
+      "expected": "one canonical row per order",
+      "affected_records": 3,
+      "action": "Keep first source row for canonical analysis; retain source and flag duplicates."
+    },
+    {
+      "check": "delivered_completion_timestamp",
+      "status": "WARN",
+      "observed": 37,
+      "expected": 0,
+      "affected_records": 37,
+      "action": "Exclude from timing metrics; investigate missing completion events."
+    },
+    {
+      "check": "promised_eta_present",
+      "status": "PASS",
+      "observed": 1600,
+      "expected": 1600,
+      "affected_records": 0,
+      "action": "Rows without ETA are ineligible for lateness metrics."
+    },
+    {
+      "check": "status_representation",
+      "status": "WARN",
+      "observed": {
+        "delivered": 1530,
+        "cancelled": 68,
+        "Delivered": 5
+      },
+      "expected": "Delivered/cancelled; casing may be normalized",
+      "affected_records": 5,
+      "action": "Normalize case for analysis while retaining original values."
+    },
+    {
+      "check": "traffic_bucket_categories",
+      "status": "WARN",
+      "observed": {
+        "observed_values": {
+          "medium": 635,
+          "severe": 136,
+          "high": 448,
+          "low": 381,
+          "HIGH": 3
+        },
+        "safe_case_whitespace_normalization": {
+          "medium": 635,
+          "severe": 136,
+          "high": 451,
+          "low": 381
+        },
+        "representation_variants": {
+          "high": [
+            "HIGH",
+            "high"
+          ]
+        },
+        "unexpected_normalized_values": [],
+        "spacing_to_underscore_candidates_pending_confirmation": {},
+        "unmapped_values_requiring_semantic_review": []
+      },
+      "expected": {
+        "expected_after_safe_normalization": [
+          "low",
+          "medium",
+          "high",
+          "severe"
+        ]
+      },
+      "affected_records": 1,
+      "action": "Case and surrounding whitespace can be normalized safely; preserve raw values and confirm any unexpected traffic meaning."
+    },
+    {
+      "check": "support_ticket_categories",
+      "status": "WARN",
+      "observed": {
+        "observed_values": {
+          "late_delivery": 38,
+          "eta_changed": 37,
+          "status_mismatch": 29,
+          "Late Delivery": 1,
+          "late_delivery ": 1,
+          "ETA issue": 1,
+          "restaurant_delay": 37,
+          "ready_but_waiting": 33,
+          "driver_not_moving": 25
+        },
+        "safe_case_whitespace_normalization": {
+          "late_delivery": 39,
+          "eta_changed": 37,
+          "status_mismatch": 29,
+          "late delivery": 1,
+          "eta issue": 1,
+          "restaurant_delay": 37,
+          "ready_but_waiting": 33,
+          "driver_not_moving": 25
+        },
+        "representation_variants": {
+          "late_delivery": [
+            "late_delivery",
+            "late_delivery "
+          ]
+        },
+        "unexpected_normalized_values": [
+          "eta issue",
+          "late delivery"
+        ],
+        "spacing_to_underscore_candidates_pending_confirmation": {
+          "late_delivery": [
+            "Late Delivery"
+          ]
+        },
+        "unmapped_values_requiring_semantic_review": [
+          "eta issue"
+        ]
+      },
+      "expected": "Known categories after case/outer-whitespace normalization",
+      "affected_records": 3,
+      "action": "Case/outer whitespace are safe representation normalization. Keep raw labels; confirm space-to-underscore candidates and review wording such as 'ETA issue' before mapping."
+    },
+    {
+      "check": "order_restaurant_reference",
+      "status": "WARN",
+      "observed": {
+        "mapped": 1597,
+        "total": 1600
+      },
+      "expected": 1600,
+      "affected_records": 3,
+      "action": "Retain rows with missing/unmapped restaurant IDs and investigate enrichment coverage."
+    },
+    {
+      "check": "order_customer_reference",
+      "status": "PASS",
+      "observed": {
+        "mapped": 1600,
+        "total": 1600
+      },
+      "expected": 1600,
+      "affected_records": 0,
+      "action": "Investigate missing or unmapped customer identifiers."
+    },
+    {
+      "check": "order_driver_reference",
+      "status": "WARN",
+      "observed": {
+        "mapped": 1597,
+        "total": 1600
+      },
+      "expected": 1600,
+      "affected_records": 3,
+      "action": "Retain rows with missing/unmapped driver IDs and investigate enrichment coverage."
+    },
+    {
+      "check": "ticket_order_reference",
+      "status": "WARN",
+      "observed": {
+        "linked": 199,
+        "total": 202
+      },
+      "expected": 202,
+      "affected_records": 3,
+      "action": "Preserve unlinked tickets as customer signals; exclude from order joins."
+    },
+    {
+      "check": "restaurant_status_categories",
+      "status": "WARN",
+      "observed": {
+        "READY": 1,
+        "Ready": 1,
+        "ready ": 2,
+        "handoff": 1,
+        "unknown": 1,
+        "handed_off": 168,
+        "ready": 157,
+        "preparing": 171
+      },
+      "expected": "Preparing, ready, handed_off; handoff/unknown remain ambiguous",
+      "affected_records": 2,
+      "action": "Do not map handoff to handed_off or unknown to a state without owner confirmation."
+    },
+    {
+      "check": "dispatch_api_completeness",
+      "status": "PASS",
+      "observed": {
+        "received": 1600,
+        "reported_total": 1600,
+        "unique_ids": 1600,
+        "retries": 2
+      },
+      "expected": "All API-reported rows, unique order IDs",
+      "affected_records": 0,
+      "action": "Fail pipeline if pagination is incomplete or duplicate API order IDs occur."
+    },
+    {
+      "check": "dispatch_order_coverage",
+      "status": "PASS",
+      "observed": {
+        "source_orders_missing_from_api": 0,
+        "api_orders_missing_from_source": 0
+      },
+      "expected": "Exact order ID set match",
+      "affected_records": 0,
+      "action": "Reconcile order IDs across operational and dispatch sources."
+    },
+    {
+      "check": "supplied_outcome_consistency",
+      "status": "PASS",
+      "observed": {
+        "source_outcome_rows": 1600,
+        "mismatched_or_unmatched": 0
+      },
+      "expected": "Status and late flag agree; delay agrees within 0.011 minutes",
+      "affected_records": 0,
+      "action": "Use timestamp-derived canonical values and investigate source outcome discrepancies."
+    },
+    {
+      "check": "order_event_order_reference",
+      "status": "PASS",
+      "observed": {
+        "linked": 4955,
+        "total": 4955
+      },
+      "expected": 4955,
+      "affected_records": 0,
+      "action": "Investigate unlinked order events while preserving their source records."
+    },
+    {
+      "check": "customer_interaction_order_reference",
+      "status": "PASS",
+      "observed": {
+        "linked": 497,
+        "total": 497
+      },
+      "expected": 497,
+      "affected_records": 0,
+      "action": "Investigate unlinked order events while preserving their source records."
+    },
+    {
+      "check": "customer_action_order_reference",
+      "status": "PASS",
+      "observed": {
+        "linked": 2365,
+        "total": 2365
+      },
+      "expected": 2365,
+      "affected_records": 0,
+      "action": "Investigate unlinked order events while preserving their source records."
+    },
+    {
+      "check": "intervention_order_reference",
+      "status": "PASS",
+      "observed": {
+        "linked": 430,
+        "total": 430
+      },
+      "expected": 430,
+      "affected_records": 0,
+      "action": "Investigate unlinked order events while preserving their source records."
+    },
+    {
+      "check": "restaurant_status_order_reference",
+      "status": "PASS",
+      "observed": {
+        "linked": 502,
+        "total": 502
+      },
+      "expected": 502,
+      "affected_records": 0,
+      "action": "Investigate status rows without a known order."
+    },
+    {
+      "check": "restaurant_status_restaurant_reference",
+      "status": "PASS",
+      "observed": {
+        "linked": 502,
+        "total": 502
+      },
+      "expected": 502,
+      "affected_records": 0,
+      "action": "Investigate status rows without a known restaurant."
+    },
+    {
+      "check": "restaurant_status_freshness",
+      "status": "UNKNOWN",
+      "observed": {
+        "status_rows": 502,
+        "before_pickup": 336,
+        "at_or_after_pickup": 166,
+        "median_minutes_from_pickup": -6.556679991666667,
+        "more_than_60_minutes_before_pickup": 7
+      },
+      "expected": "Freshness SLA by use case (not supplied)",
+      "affected_records": 0,
+      "action": "Set different freshness SLAs for weekly analysis, live ETA and restaurant accountability."
+    },
+    {
+      "check": "timestamp_chronology",
+      "status": "WARN",
+      "observed": 9,
+      "expected": 0,
+      "affected_records": 9,
+      "action": "Review affected rows; do not rewrite timestamps."
+    },
+    {
+      "check": "late_kpi_definition_owner",
+      "status": "UNKNOWN",
+      "observed": "Stakeholder definitions conflict; no owner documented",
+      "expected": "Approved canonical definition",
+      "affected_records": 1,
+      "action": "Obtain KPI owner sign-off before external publication."
+    },
+    {
+      "check": "late_kpi_publishability",
+      "status": "WARN",
+      "observed": {
+        "primary_rate_reproduced": 0.5638795986622074,
+        "historical_style_rate": 0.5638795986622074,
+        "historical_denominator": 1495,
+        "historical_unclassifiable": 0,
+        "canonical_owner": "undocumented",
+        "publication": "not approved"
+      },
+      "expected": "Business owner confirms canonical definition before publication",
+      "affected_records": 1,
+      "action": "The 56% claim is reproducible; keep publication at WARN/UNKNOWN until the business owner confirms the KPI definition."
+    }
+  ]
+}
